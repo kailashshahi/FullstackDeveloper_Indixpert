@@ -4,8 +4,11 @@
 void createaccount();
 void Deposit();
 void Withdraw();
-void DisplayAccountDetail();
-void CheckBalance();
+void DisplayAccountDetail(); 
+void CheckBalance(); 
+void resetcolor();
+void errorcolor();
+void AccountCreatedSuccessfully();
 int Totalbalance;
 char MainAccount[11];
 
@@ -13,7 +16,7 @@ int main()
 {
     int taskno;
 
-    printf("********Project 2 - Banking Management System******** \n");
+    printf("********Project 2 - Banking Management System******** \n"); 
 
     printf("\t1- Create Account");
     printf("\n\t2- Deposit");
@@ -26,8 +29,6 @@ int main()
 
         printf("\n\nPlease enter the task number: ");
         scanf("%d", &taskno);
-
-        
 
         switch (taskno)
         {
@@ -71,15 +72,16 @@ void createaccount()
             do
             {
 
-                printf("Please enter Balance (Opening Amount would be 500 minimum)");
+                printf("Please enter Balance (Opening Amount would be 500 minimum) ");
                 scanf("%d", &balance);
 
             } while (balance < 500);
         }
 
     } while (strlen(accountno) != 11);
-
+    AccountCreatedSuccessfully();
     printf("\nThank You to join India Bank");
+    resetcolor();
     printf("\nYour Account Details ");
     printf("\nAccount Number : %s", accountno);
     printf("\nAccount Holder Name: %s", accountholder);
@@ -92,6 +94,7 @@ void DisplayAccountDetail()
 {
     if (strlen(MainAccount) < 1)
     {
+
         printf("\nError- Please Create Customer Account First");
     }
     else
@@ -106,7 +109,9 @@ void Deposit()
 
     if (strlen(MainAccount) < 1)
     {
+        errorcolor();
         printf("\nError- Please Create Customer Account First");
+        resetcolor();
     }
     else
     {
@@ -127,12 +132,14 @@ void Withdraw()
 {
     if (strlen(MainAccount) < 1)
     {
+        errorcolor();
         printf("\nError- Please Create Customer Account First");
+        resetcolor();
     }
     else
     {
         int withdrawamount;
-        printf("\n please enter the withdraw Amount");
+        printf("\nplease enter the withdraw Amount");
         scanf("%d", &withdrawamount);
         Totalbalance -= withdrawamount;
         DisplayAccountDetail();
@@ -142,10 +149,27 @@ void CheckBalance()
 {
     if (strlen(MainAccount) < 1)
     {
-        printf("\nError- Please Create Customer Account First");
+        errorcolor();
+        printf("\nError- Please Create Customer Account First"); 
+        resetcolor();
     }
     else
     {
         DisplayAccountDetail();
     }
+}
+
+void resetcolor()
+{
+    printf("\033[0m");
+}
+
+void errorcolor()
+{
+    printf("\033[1;31m");
+}
+
+void AccountCreatedSuccessfully()
+{
+    printf("\033[0;32m");
 }
